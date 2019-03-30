@@ -71,7 +71,6 @@ public class JDBCEventFactory implements EventDao {
     public void close() {
         try {
             connection.close();
-            System.out.println("closing event dao");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -1,10 +1,15 @@
 package model.dao.impl;
 
 import model.dao.UserDao;
+import model.dao.mapper.UserMapper;
 import model.entity.User;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class JDBCUserFactory implements UserDao {
 
@@ -40,7 +45,33 @@ public class JDBCUserFactory implements UserDao {
     }
 
     @Override
-    public void close() {
+    public Optional<User> findByEmail(String email) {
+        Optional<User> result = Optional.empty();
 
+        String query = "SELECT * FROM user WHERE email = ?";
+
+        try(PreparedStatement ps = connection.prepareStatement(query)) {
+
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+
+            UserMapper userMapper = new UserMapper();
+
+            userMapper.extractFromResultSet(rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    @Override
+    public void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
