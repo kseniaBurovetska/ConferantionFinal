@@ -17,7 +17,7 @@
 </head>
 <body class="d-flex flex-column h-100">
 
-<jsp:include page="views/header.jsp"/>
+<jsp:include page="WEB-INF/views/header.jsp"/>
 
 
 <div class="container-fluid">
@@ -25,7 +25,7 @@
 
   <div class="row centered">
     <div class=" text-center col-lg-3 my-5">
-      <form action="${pageContext.request.contextPath}/app/login" method="get" class="form-signin">
+      <form action="${pageContext.request.contextPath}/app/login" method="post" class="form-signin">
         <div class="form-group">
           <%--<label for="formGroupExampleInput">Example label</label>--%>
           <input type="text" class="form-control" name="login" id="login" placeholder="Login" required autofocus>
@@ -48,7 +48,7 @@
   </div>
 </div>
 
-  <jsp:include page="views/footer.jsp"/>
+  <jsp:include page="WEB-INF/views/footer.jsp"/>
 
 </body>
 </html>

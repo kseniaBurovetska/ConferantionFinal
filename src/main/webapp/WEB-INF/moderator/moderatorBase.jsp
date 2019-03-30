@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>Visitor</title>
+  <title>Moderator</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
@@ -21,7 +21,7 @@
 <jsp:include page="../views/header.jsp"/>
 
 <div class="container-fluid">
-  <p class=" py-2 ml-3">I am a visitor</p>
+  <p class=" py-2 ml-3">I am a moderator</p>
 </div>
 
 <jsp:include page="../views/footer.jsp"/>

@@ -12,7 +12,7 @@
 <body class="d-flex flex-column h-100">
 
 
-<jsp:include page="views/header.jsp"/>
+<jsp:include page="WEB-INF/views/header.jsp"/>
 
 
 <div class="container">
@@ -110,7 +110,7 @@
   </div>--%>
 </div>
 
-<jsp:include page="views/footer.jsp"/>
+<jsp:include page="WEB-INF/views/footer.jsp"/>
 
 </body>
 </html>

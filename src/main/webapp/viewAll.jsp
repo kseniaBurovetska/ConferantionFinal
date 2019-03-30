@@ -15,7 +15,7 @@
 <body class="d-flex flex-column h-100">
 
 
-<jsp:include page="header.jsp"/>
+<jsp:include page="WEB-INF/views/header.jsp"/>
 
 
 <br><br>
@@ -50,7 +50,7 @@
   </table>
 </div>
 
-<jsp:include page="footer.jsp"/>
+<jsp:include page="WEB-INF/views/footer.jsp"/>
 
 </body>
 </html>
