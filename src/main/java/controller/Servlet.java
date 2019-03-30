@@ -1,9 +1,6 @@
 package controller;
 
-import controller.command.Command;
-import controller.command.Login;
-import controller.command.Registration;
-import controller.command.ViewAll;
+import controller.command.*;
 import model.service.EventService;
 
 import javax.servlet.ServletException;
@@ -25,6 +22,10 @@ public class Servlet extends HttpServlet {
         commands.put("viewAll", new ViewAll());
         commands.put("registration", new Registration());
         commands.put("login", new Login());
+
+        commands.put("moderator", new Moderator());
+        commands.put("speaker", new Speaker());
+        commands.put("visitor", new Visitor());
     }
 
     @Override

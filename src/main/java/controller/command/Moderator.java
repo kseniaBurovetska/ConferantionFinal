@@ -2,10 +2,9 @@ package controller.command;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class ViewAll implements Command {
-
+public class Moderator implements Command {
     @Override
     public String execute(HttpServletRequest request) {
-        return "/viewAll.jsp";
+        return "/WEB-INF/moderator/moderatorBase.jsp";
     }
 }

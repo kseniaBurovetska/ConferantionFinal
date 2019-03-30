@@ -1,5 +1,7 @@
 package controller.command;
 
+import model.entity.enums.Role;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,9 +12,9 @@ public class Login implements Command {
 
     public Login() {
         pages.put("login", "/login.jsp");
-        pages.put("moderator", "redirect:WEB-INF/moderator/moderatorBase");
-        pages.put("speaker", "redirect:WEB-INF/speaker/speakerBase");
-        pages.put("visitor", "redirect:WEB-INF/visitor/visitorBase");
+        pages.put("moderator", "redirect:moderator");
+        pages.put("speaker", "redirect:speaker");
+        pages.put("visitor", "redirect:visitor");
     }
 
     @Override
