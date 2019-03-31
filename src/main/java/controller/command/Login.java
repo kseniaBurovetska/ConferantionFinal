@@ -1,32 +1,51 @@
 package controller.command;
 
-import model.entity.enums.Role;
+import model.entity.User;
+import model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class Login implements Command {
 
-    Map<String, String> pages = new HashMap<>();
+    private Map<String, String> pages = new HashMap<>();
+    private UserService userService;
 
-    public Login() {
+    public Login(UserService userService) {
+        this.userService = userService;
+
         pages.put("login", "/login.jsp");
-        pages.put("moderator", "redirect:moderator");
-        pages.put("speaker", "redirect:speaker");
-        pages.put("visitor", "redirect:visitor");
+        pages.put("MODERATOR", "redirect:moderator");
+        pages.put("SPEAKER", "redirect:speaker");
+        pages.put("VISITOR", "redirect:visitor");
     }
 
     @Override
     public String execute(HttpServletRequest request) {
-        String name = request.getParameter("login");
+        String email = request.getParameter("login");
         String pass = request.getParameter("password");
 
-        System.out.println(name + " " + pass);
-        if (name == null || name.equals("") || pass == null || pass.equals("")) {
+        //System.out.println(email + " " + pass);
+        if (email == null || email.equals("") || pass == null || pass.equals("")) {
             return "/login.jsp";
         }
 
-        return pages.getOrDefault(name.toLowerCase(), pages.get("login"));
+        Optional<User> user = userService.login(email);
+
+
+        if (user.isPresent() && pass.equals(user.get().getPassword())) {
+
+            if(CommandUtility.checkUserIsLogged(request, user.get().getEmail())){
+                return "/WEB-INF/error.jsp";
+            }
+
+            CommandUtility.setUserLogged(request, user.get().getRole(), user.get().getEmail());
+
+            return pages.getOrDefault(user.get().getRole().name(), pages.get("login"));
+        }
+
+        return "/login.jsp";
     }
 }

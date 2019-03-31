@@ -2,6 +2,7 @@ package controller;
 
 import controller.command.*;
 import model.service.EventService;
+import model.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Servlet extends HttpServlet {
 
@@ -17,23 +19,21 @@ public class Servlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         EventService eventService = new EventService();
-        getServletContext().setAttribute("events", eventService.getAllEvents());
 
-        commands.put("viewAll", new ViewAll());
-        commands.put("registration", new Registration());
-        commands.put("login", new Login());
+        getServletContext().setAttribute("events", eventService.getAllEvents());
+        getServletContext().setAttribute("loggedUsers", new HashSet<String>());
+
+        commands.put("registration", new Registration(new UserService()));
+        commands.put("login", new Login(new UserService()));
 
         commands.put("moderator", new Moderator());
         commands.put("speaker", new Speaker());
         commands.put("visitor", new Visitor());
+        commands.put("logout", new Logout());
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String firstName = (req.getParameter("firstName"));
-        String lastName = (req.getParameter("lastName"));
-        String login = (req.getParameter("regLogin"));
-        String email = (req.getParameter("email"));
 
         processRequest(req, resp);
     }
@@ -50,7 +50,7 @@ public class Servlet extends HttpServlet {
 
         String path = req.getRequestURI();
         path = path.replaceAll(".*/app/", "");
-        Command command = commands.getOrDefault(path, new Login());
+        Command command = commands.getOrDefault(path, (r) -> "/login.jsp");
 
         System.out.println(path);
 
