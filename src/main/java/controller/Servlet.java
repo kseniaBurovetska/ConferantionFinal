@@ -20,7 +20,7 @@ public class Servlet extends HttpServlet {
     public void init() throws ServletException {
         EventService eventService = new EventService();
 
-        getServletContext().setAttribute("events", eventService.getAllEvents());
+        //getServletContext().setAttribute("events", eventService.getAllEvents());
         getServletContext().setAttribute("loggedUsers", new HashSet<String>());
 
         commands.put("registration", new Registration(new UserService()));
@@ -52,7 +52,7 @@ public class Servlet extends HttpServlet {
         path = path.replaceAll(".*/app/", "");
         Command command = commands.getOrDefault(path, (r) -> "/login.jsp");
 
-        System.out.println(path);
+        //System.out.println(path);
 
         String page = command.execute(req);
         if (page.contains("redirect")) {

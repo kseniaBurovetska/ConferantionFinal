@@ -12,9 +12,9 @@ public class Logout implements Command {
         String email = (String)request.getSession().getAttribute("email");
 
         if(email != null){
-
             HashSet<String> loggedUsers = (HashSet<String>)
                     request.getSession().getServletContext().getAttribute("loggedUsers");
+
             loggedUsers.remove(email);
             request.getSession().getServletContext().setAttribute("loggedUsers", loggedUsers);
         }
