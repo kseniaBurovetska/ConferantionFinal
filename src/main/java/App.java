@@ -1,3 +1,5 @@
+import model.dao.mapper.UserMapper;
+
 import java.sql.*;
 
 public class App {
@@ -6,7 +8,7 @@ public class App {
         System.out.println("Assist".hashCode());
 
         System.out.println("Hello!");
-        Connection con =
+        Connection connection =
                 DriverManager.
                         getConnection(  "jdbc:"+
                                         "mysql:"+
@@ -15,11 +17,27 @@ public class App {
                                 "root" ,
                                 "root");
 
-        Statement query = con.createStatement();
+        /*Statement query = con.createStatement();
         ResultSet rs = query.executeQuery("SELECT * FROM event");
         while( rs.next()) {
-            System.out.println(rs.getString("name"));}
+            System.out.println(rs.getString("name"));}*/
 
+
+        String query = "SELECT * FROM user WHERE email = ?";
+
+        try(PreparedStatement ps = connection.prepareCall(query)) {
+
+            System.out.println(connection.isClosed());
+            ps.setString(1, "modEmail");
+            ResultSet rs = ps.executeQuery();
+
+            UserMapper userMapper = new UserMapper();
+
+            userMapper.extractFromResultSet(rs);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }
