@@ -19,6 +19,6 @@ public class Logout implements Command {
             request.getSession().getServletContext().setAttribute("loggedUsers", loggedUsers);
         }
 
-        return "/login.jsp";
+        return "redirect:login";
     }
 }
