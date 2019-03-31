@@ -44,7 +44,7 @@
       </form>
     </div>
 
-    <div class="container-fluid col-lg-7 col-lg-offset-5 my-3 text-center ">
+    <div class="container-fluid col-lg-7 col-lg-offset-5 mt-3 pb-2 text-center ">
       <h2>Upcoming events</h2>
 
       <table class="table my-5">
