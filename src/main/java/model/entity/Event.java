@@ -14,7 +14,7 @@ public class Event {
 
     private int id;
     private String name;
-    private Time dateTime;
+    private String dateTime;
     private String location;
 
 }

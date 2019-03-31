@@ -46,7 +46,7 @@ public class JDBCEventFactory implements EventDao {
 
             while(rs.next()) {
                 Event event = eventMapper.extractFromResultSet(rs);
-                event = eventMapper.makeUnique(events, event);
+                eventMapper.makeUnique(events, event);
             }
 
             return new ArrayList<>(events.values());
@@ -55,6 +55,34 @@ public class JDBCEventFactory implements EventDao {
             e.printStackTrace();
             return null;
         }
+    }
+
+
+    @Override
+    public List<Event> getUpcomingEvents() {
+
+        Map<Integer, Event> events = new HashMap<>();
+
+        final String query = "select * from event order by time limit 8";
+
+        try(Statement st = connection.createStatement()){
+
+            ResultSet rs = st.executeQuery(query);
+
+            EventMapper eventMapper = new EventMapper();
+
+            while (rs.next()){
+                Event event = eventMapper.extractFromResultSet(rs);
+                eventMapper.makeUnique(events, event);
+            }
+
+            return new ArrayList<>(events.values());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     @Override
@@ -75,4 +103,5 @@ public class JDBCEventFactory implements EventDao {
             throw new RuntimeException(e);
         }
     }
+
 }

@@ -4,7 +4,11 @@ import model.entity.Event;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class EventMapper implements ObjectMapper<Event> {
 
@@ -15,7 +19,12 @@ public class EventMapper implements ObjectMapper<Event> {
 
         event.setId(rs.getInt("idevent"));
         event.setName(rs.getString("event.name"));
-        event.setDateTime(rs.getTime("time"));
+
+        LocalDateTime localDateTime = LocalDateTime.of(rs.getDate("time").toLocalDate(),
+                rs.getTime("time").toLocalTime());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy");
+
+        event.setDateTime(localDateTime.format(formatter));
         event.setLocation(rs.getString("location"));
 
         return event;
