@@ -1,6 +1,10 @@
 package controller.listeners;
 
 
+import model.dao.DaoFactory;
+import model.dao.impl.JDBCEventFactory;
+import model.service.EventService;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -14,7 +18,8 @@ public class ContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         final ServletContext servletContext = servletContextEvent.getServletContext();
 
-
+        EventService eventService = new EventService();
+        servletContext.setAttribute("events", eventService.getUpcomingEvents());
 
 
     }
