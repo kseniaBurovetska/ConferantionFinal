@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: GlaDOS
@@ -20,30 +21,58 @@
 <jsp:include page="WEB-INF/views/header.jsp"/>
 
 
-<div class="container-fluid">
+<div class="container-fluid ">
   <%--<a href="${pageContext.request.contextPath}/app/registration">Registration</a><br>--%>
 
-  <div class="row centered">
-    <div class=" text-center col-lg-3 my-5">
+  <div class="row centered  vertical-align">
+    <div class=" text-center col-lg-3 my-5  ml-5">
+
       <form action="${pageContext.request.contextPath}/app/login" method="post" class="form-signin">
         <div class="form-group">
-          <%--<label for="formGroupExampleInput">Example label</label>--%>
           <input type="text" class="form-control" name="login" id="login" placeholder="Login" required autofocus>
         </div>
+
         <div class="form-group">
-          <input type="password" class="form-control" name="password" id="password" placeholder="Password" required
-                 autofocus>
+          <input type="password" class="form-control" name="password" id="password" placeholder="Password" required autofocus>
         </div>
+
         <div class="form-group">
           <input type="submit" class="form-control btn-submit" id="submitLogin" value="Login">
         </div>
+
         <a href="${pageContext.request.contextPath}/app/registration">Registration</a><br>
-        <a href="${pageContext.request.contextPath}/app/viewAll">View All</a>
       </form>
     </div>
 
-    <div class="col-lg-9 col-lg-offset-3 my-2 text-center ">
+    <div class="container-fluid col-lg-7 col-lg-offset-5 my-3 text-center ">
       <h2>Upcoming events</h2>
+
+      <table class="table my-5">
+
+        <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Date</th>
+          <th scope="col">Location</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <c:forEach var="event" items="${events}">
+          <tr>
+            <td>${event.id}</td>
+            <td>${event.name}</td>
+            <td>${event.dateTime}</td>
+            <td>${event.location}</td>
+          </tr>
+        </c:forEach>
+
+        </tbody>
+      </table>
+    </div>
+
     </div>
   </div>
 </div>

@@ -7,15 +7,10 @@
     font-size: 40px;
 }
 
-/*.btn-navbar:hover {*/
-
-    /*color: #d32f2f;*/
-    /*border-color: #d32f2f;*/
-
-
-    /*!*color:#ffb300;*!*/
-    /*!*border-color: #ffb300;*!*/
-/*}*/
+/*.vertical-align {
+    margin-top: auto;
+    margin-bottom: auto;
+}*/
 
 .vertical-align {
     display: flex;
