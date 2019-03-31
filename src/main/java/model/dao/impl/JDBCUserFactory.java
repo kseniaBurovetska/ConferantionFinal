@@ -50,14 +50,16 @@ public class JDBCUserFactory implements UserDao {
 
         String query = "SELECT * FROM user WHERE email = ?";
 
-        try(PreparedStatement ps = connection.prepareStatement(query)) {
+        try(PreparedStatement ps = connection.prepareCall(query)) {
 
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
 
             UserMapper userMapper = new UserMapper();
 
-            userMapper.extractFromResultSet(rs);
+            if (rs.next()) {
+                result = Optional.of(userMapper.extractFromResultSet(rs));
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();

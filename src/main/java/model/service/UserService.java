@@ -20,4 +20,9 @@ public class UserService {
         return result;
     }
 
+    public boolean validateData(User user){
+
+        return false;
+    }
+
 }
