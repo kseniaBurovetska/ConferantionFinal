@@ -29,7 +29,7 @@
 
       <form action="${pageContext.request.contextPath}/app/login" method="post" class="form-signin">
         <div class="form-group">
-          <input type="text" class="form-control" name="login" id="login" placeholder="Login" required autofocus>
+          <input type="text" class="form-control" name="email" id="email" placeholder="Email" required autofocus>
         </div>
 
         <div class="form-group">
