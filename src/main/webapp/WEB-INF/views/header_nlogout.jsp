@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: GlaDOS
-  Date: 29 Mar 2019
-  Time: 12:47
+  Date: 1 Apr 2019
+  Time: 21:42
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -29,12 +29,6 @@
     </ul>
   </div>
 
-  <div class="collapse navbar-collapse justify-content-end">
-
-      <a class="nav-link" href="${pageContext.request.contextPath}/app/logout">Logout</a>
-
-
-  </div>
 </nav>
 
 </body>

@@ -12,7 +12,7 @@
 </head>
 <body class="d-flex flex-column h-100">
 
-  <jsp:include page="views/header.jsp"/>
+  <jsp:include page="views/header_nlogout.jsp"/>
 
   <p class="py-2 ml-3">Error page! User already logged</p>
 

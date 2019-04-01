@@ -22,6 +22,8 @@
 
 <div class="container-fluid">
   <p class=" py-2 ml-3">I am a moderator</p>
+
+  <%--<a href="${pageContext.request.contextPath}/app/moderator/test">Test</a><br>--%>
 </div>
 
 <jsp:include page="../views/footer.jsp"/>

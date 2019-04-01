@@ -18,7 +18,7 @@
 </head>
 <body class="d-flex flex-column h-100">
 
-<jsp:include page="WEB-INF/views/header.jsp"/>
+<jsp:include page="WEB-INF/views/header_nlogout.jsp"/>
 
 
 <div class="container-fluid ">
