@@ -2,6 +2,7 @@ package controller.command;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
+import java.util.Optional;
 
 public class Logout implements Command {
 
@@ -9,15 +10,9 @@ public class Logout implements Command {
     @Override
     public String execute(HttpServletRequest request) {
 
-        String email = (String)request.getSession().getAttribute("email");
+        Optional<Object> email = Optional.ofNullable(request.getSession().getAttribute("email"));
 
-        if(email != null){
-            HashSet<String> loggedUsers = (HashSet<String>)
-                    request.getSession().getServletContext().getAttribute("loggedUsers");
-
-            loggedUsers.remove(email);
-            request.getSession().getServletContext().setAttribute("loggedUsers", loggedUsers);
-        }
+        email.ifPresent(e -> CommandUtility.unlogUser(request, e.toString()));
 
         return "redirect:login";
     }

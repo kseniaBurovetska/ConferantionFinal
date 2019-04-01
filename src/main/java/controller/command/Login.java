@@ -27,7 +27,6 @@ public class Login implements Command {
         String email = request.getParameter("email");
         String pass = request.getParameter("password");
 
-        //System.out.println(email + " " + pass);
         if (email == null || email.equals("") || pass == null || pass.equals("")) {
             return "/login.jsp";
         }
@@ -37,11 +36,9 @@ public class Login implements Command {
 
         if (user.isPresent() && pass.equals(user.get().getPassword())) {
 
-            if(CommandUtility.checkUserIsLogged(request, user.get().getEmail())){
+            if(CommandUtility.cannotLogUser(request, user.get().getEmail(), user.get().getRole())){
                 return "/WEB-INF/error.jsp";
             }
-
-            CommandUtility.setUserLogged(request, user.get().getRole(), user.get().getEmail());
 
             return pages.getOrDefault(user.get().getRole().name(), pages.get("login"));
         }

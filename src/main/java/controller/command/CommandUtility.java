@@ -9,15 +9,20 @@ import java.util.HashSet;
 
 public class CommandUtility {
 
-    static void setUserLogged(HttpServletRequest request, Role role, String email) {
-        HttpSession session = request.getSession();
-        //ServletContext context = request.getServletContext();
+    public static void unlogUser(HttpServletRequest request, String email) {
+        HashSet<String> loggedUsers = (HashSet<String>)
+                request.getSession().getServletContext().getAttribute("loggedUsers");
 
-        session.setAttribute("email", email);
-        session.setAttribute("role", role);
+        loggedUsers.remove(email);
+        request.getSession().getServletContext().setAttribute("loggedUsers", loggedUsers);
+
+        HttpSession session = request.getSession();
+
+        session.setAttribute("email", null);
+        session.setAttribute("role", null);
     }
 
-    static boolean checkUserIsLogged(HttpServletRequest request, String email){
+    static boolean cannotLogUser(HttpServletRequest request, String email, Role role){
         HashSet<String> loggedUsers = (HashSet<String>) request.getSession().getServletContext()
                 .getAttribute("loggedUsers");
 
@@ -27,6 +32,11 @@ public class CommandUtility {
 
         loggedUsers.add(email);
         request.getSession().getServletContext().setAttribute("loggedUsers", loggedUsers);
+
+        HttpSession session = request.getSession();
+
+        session.setAttribute("email", email);
+        session.setAttribute("role", role);
 
         return false;
     }

@@ -18,9 +18,6 @@ public class Servlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        EventService eventService = new EventService();
-
-        //getServletContext().setAttribute("events", eventService.getAllEvents());
         getServletContext().setAttribute("loggedUsers", new HashSet<String>());
 
         commands.put("registration", new Registration(new UserService()));
@@ -30,6 +27,7 @@ public class Servlet extends HttpServlet {
         commands.put("speaker", new Speaker());
         commands.put("visitor", new Visitor());
         commands.put("logout", new Logout());
+        commands.put("home", new Home());
     }
 
     @Override
